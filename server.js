@@ -8,8 +8,8 @@ var upload1=multer({ limits: { fileSize: maxFileSize } }).single('file');
 
 app.set('port',process.env.PORT||3000);
 
-app.get('/',function (req,res){//redirects anypage other than homepage to homepage.
-   res.sendFile(__dirname+'/upload.html');
+app.use(function(req,res,next){//redirects anypage other than homepage to homepage.
+    (req.path!=='/') ? res.redirect(301,'/') :  next();
 });
 
 app.get('/',function (req,res){
